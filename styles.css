@@ -8,8 +8,8 @@
   --gold-light: #d8bc7f;
   --line: rgba(17, 20, 20, 0.16);
   --max-width: 1240px;
-  --display: "Bodoni 72", "Times New Roman", Georgia, serif;
-  --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: Georgia, "Times New Roman", serif;
+  --body: Aptos, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 *,
@@ -186,11 +186,13 @@ a {
 .hero-grid {
   position: absolute;
   inset: 0;
-  opacity: 0.38;
+  opacity: 0.42;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 82px 82px;
+    linear-gradient(30deg, rgba(255, 255, 255, 0.036) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 188, 127, 0.03) 1px, transparent 1px);
+  background-position: center;
+  background-size: 124px 72px, 124px 72px, 248px 100%;
   mask-image: linear-gradient(90deg, transparent, black 42%, black);
 }
 
@@ -305,73 +307,203 @@ h1 em {
   justify-items: center;
 }
 
-.diamond-frame {
+.gem-scene {
   position: relative;
-  width: clamp(220px, 28vw, 430px);
+  display: grid;
+  width: clamp(260px, 31vw, 470px);
   aspect-ratio: 1;
-  border: 1px solid rgba(216, 188, 127, 0.38);
-  transform: rotate(45deg);
+  place-items: center;
+  isolation: isolate;
 }
 
-.diamond-frame::before,
-.diamond-frame::after {
+.gem-scene::before,
+.gem-scene::after {
   position: absolute;
   content: "";
 }
 
-.diamond-frame::before {
-  inset: 9%;
-  border: 1px solid rgba(216, 188, 127, 0.18);
-}
-
-.diamond-frame::after {
-  top: 50%;
-  left: -15%;
-  width: 130%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(216, 188, 127, 0.6), transparent);
-}
-
-.diamond-core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 34%;
+.gem-scene::before {
+  z-index: -2;
+  width: 68%;
   aspect-ratio: 1;
-  border: 1px solid var(--gold-light);
-  background: rgba(216, 188, 127, 0.05);
-  transform: translate(-50%, -50%);
-  box-shadow:
-    0 0 60px rgba(183, 146, 77, 0.14),
-    inset 0 0 38px rgba(183, 146, 77, 0.08);
+  border-radius: 50%;
+  background: rgba(183, 146, 77, 0.14);
+  filter: blur(55px);
 }
 
-.facet {
+.gem-scene::after {
+  top: 50%;
+  left: -8%;
+  z-index: -1;
+  width: 116%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(216, 188, 127, 0.44), transparent);
+}
+
+.orbit {
   position: absolute;
   display: block;
-  width: 1px;
-  background: rgba(216, 188, 127, 0.42);
-  transform-origin: top;
+  aspect-ratio: 1;
+  border: 1px solid rgba(216, 188, 127, 0.2);
+  border-radius: 50%;
 }
 
-.facet-one {
-  top: 0;
+.orbit::before,
+.orbit::after {
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--gold-light);
+  border-radius: 50%;
+  background: var(--ink);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.orbit::before {
+  left: -3px;
+}
+
+.orbit::after {
+  right: -3px;
+}
+
+.orbit-one {
+  width: 106%;
+  transform: rotate(-18deg) scaleY(0.54);
+}
+
+.orbit-two {
+  width: 88%;
+  border-color: rgba(216, 188, 127, 0.14);
+  transform: rotate(35deg) scaleY(0.7);
+}
+
+.orbit-three {
+  width: 72%;
+  border-color: rgba(216, 188, 127, 0.12);
+  transform: rotate(78deg) scaleY(0.62);
+}
+
+.gem-rim {
+  position: relative;
+  width: 55%;
+  aspect-ratio: 1;
+  padding: 1px;
+  background: conic-gradient(
+    from 22.5deg,
+    rgba(216, 188, 127, 0.3),
+    rgba(255, 240, 199, 0.92),
+    rgba(142, 105, 45, 0.4),
+    rgba(216, 188, 127, 0.86),
+    rgba(216, 188, 127, 0.3)
+  );
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.42));
+  transform: rotate(45deg);
+}
+
+.gemstone {
+  position: absolute;
+  inset: 2px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 68% 26%, rgba(255, 243, 209, 0.24), transparent 20%),
+    conic-gradient(
+      from 22.5deg,
+      rgba(216, 188, 127, 0.03) 0deg 45deg,
+      rgba(216, 188, 127, 0.16) 45deg 90deg,
+      rgba(255, 255, 255, 0.035) 90deg 135deg,
+      rgba(183, 146, 77, 0.2) 135deg 180deg,
+      rgba(255, 255, 255, 0.025) 180deg 225deg,
+      rgba(216, 188, 127, 0.13) 225deg 270deg,
+      rgba(255, 255, 255, 0.045) 270deg 315deg,
+      rgba(183, 146, 77, 0.1) 315deg 360deg
+    ),
+    #121616;
+  clip-path: inherit;
+}
+
+.gemstone::before {
+  position: absolute;
+  inset: 13%;
+  border: 1px solid rgba(216, 188, 127, 0.42);
+  background: conic-gradient(
+    from 0deg,
+    rgba(216, 188, 127, 0.04),
+    rgba(216, 188, 127, 0.18),
+    rgba(255, 255, 255, 0.02),
+    rgba(216, 188, 127, 0.12),
+    rgba(216, 188, 127, 0.04)
+  );
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  content: "";
+}
+
+.cut-line {
+  position: absolute;
+  top: 50%;
   left: 50%;
-  height: 50%;
+  z-index: 2;
+  display: block;
+  width: 72%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(216, 188, 127, 0.58), transparent);
+  transform-origin: center;
 }
 
-.facet-two {
-  top: 50%;
-  left: 0;
-  height: 50%;
-  transform: rotate(-90deg);
+.cut-one {
+  transform: translate(-50%, -50%);
 }
 
-.facet-three {
-  top: 50%;
-  right: 0;
-  height: 50%;
-  transform: rotate(90deg);
+.cut-two {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cut-three {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.cut-four {
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.gem-table {
+  position: absolute;
+  inset: 31%;
+  z-index: 3;
+  border: 1px solid rgba(255, 238, 195, 0.72);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 245, 220, 0.22), transparent 25%),
+    rgba(9, 12, 12, 0.66);
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  box-shadow: inset 0 0 24px rgba(216, 188, 127, 0.14);
+}
+
+.gem-glint {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--gold-light);
+  background: rgba(216, 188, 127, 0.08);
+  transform: rotate(45deg);
+  box-shadow: 0 0 20px rgba(216, 188, 127, 0.4);
+}
+
+.glint-one {
+  top: 18%;
+  right: 17%;
+}
+
+.glint-two {
+  bottom: 23%;
+  left: 9%;
+  width: 5px;
+  height: 5px;
+  opacity: 0.66;
 }
 
 .hero-art > p {
@@ -482,9 +614,9 @@ h1 em {
   position: relative;
   display: grid;
   min-height: 720px;
-  grid-template-columns: 1fr minmax(320px, 0.72fr);
+  grid-template-columns: minmax(340px, 0.9fr) minmax(460px, 1.1fr);
   align-items: end;
-  gap: clamp(3rem, 8vw, 8rem);
+  gap: clamp(3rem, 5vw, 5.5rem);
   overflow: hidden;
   padding: clamp(5rem, 9vw, 9rem) max(5vw, calc((100vw - var(--max-width)) / 2));
   background:
@@ -495,14 +627,28 @@ h1 em {
 
 .heritage-panel::before {
   position: absolute;
-  top: 15%;
-  left: 15%;
-  width: 46vw;
+  top: 8%;
+  left: 8%;
+  width: 52vw;
   max-width: 680px;
   aspect-ratio: 1;
-  border: 1px solid rgba(216, 188, 127, 0.12);
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(216, 188, 127, 0.13) 0deg 0.6deg,
+    transparent 0.6deg 15deg
+  );
   content: "";
-  transform: rotate(45deg);
+  mask: radial-gradient(
+    circle,
+    transparent 0 31%,
+    #000 31.3% 31.8%,
+    transparent 32.1% 50%,
+    #000 50.3% 50.8%,
+    transparent 51.1% 68%,
+    #000 68.3% 68.8%,
+    transparent 69.1%
+  );
 }
 
 .heritage-panel > .eyebrow {
@@ -525,6 +671,7 @@ h1 em {
 .heritage-copy {
   position: relative;
   z-index: 1;
+  max-width: 620px;
   padding-bottom: 0.5rem;
 }
 
@@ -684,9 +831,10 @@ h1 em {
   }
 
   .site-nav {
-    position: fixed;
+    position: absolute;
     inset: 0;
     display: flex;
+    height: 100%;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
@@ -701,6 +849,7 @@ h1 em {
     text-transform: none;
     visibility: hidden;
     opacity: 0;
+    overflow-y: auto;
     transform: translateY(-1rem);
     transition:
       opacity 220ms ease,
@@ -729,8 +878,21 @@ h1 em {
   }
 
   .site-header.menu-active {
+    height: 100dvh;
     border-color: var(--line);
+    background: var(--paper);
     color: var(--ink);
+    backdrop-filter: none;
+  }
+
+  .site-header.menu-active .brand {
+    visibility: hidden;
+  }
+
+  .site-header.menu-active .nav-toggle {
+    position: absolute;
+    top: 14px;
+    right: 5vw;
   }
 
   .hero {
@@ -805,7 +967,7 @@ h1 em {
     padding: 2rem 0;
   }
 
-  .diamond-frame {
+  .gem-scene {
     width: min(65vw, 280px);
   }
 
