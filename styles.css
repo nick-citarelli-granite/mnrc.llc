@@ -68,6 +68,7 @@ a {
 }
 
 .site-header {
+  --scroll-progress: 0%;
   position: fixed;
   top: 0;
   left: 0;
@@ -85,6 +86,18 @@ a {
     color 260ms ease,
     height 260ms ease,
     border-color 260ms ease;
+}
+
+.site-header::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  width: var(--scroll-progress);
+  height: 1px;
+  background: var(--gold-light);
+  content: "";
+  transition: width 80ms linear;
 }
 
 .site-header.scrolled {
@@ -140,7 +153,8 @@ a {
 }
 
 .site-nav > a:hover::after,
-.site-nav > a:focus-visible::after {
+.site-nav > a:focus-visible::after,
+.site-nav > a.is-active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
@@ -571,6 +585,52 @@ h1 em {
   background: var(--gold);
 }
 
+.trust-strip {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 max(5vw, calc((100vw - var(--max-width)) / 2));
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+
+.trust-item {
+  display: grid;
+  min-height: 140px;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.8rem clamp(1.2rem, 3vw, 3rem);
+  border-left: 1px solid var(--line);
+}
+
+.trust-item:last-child {
+  border-right: 1px solid var(--line);
+}
+
+.trust-index {
+  align-self: start;
+  padding-top: 0.5rem;
+  color: var(--gold);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+}
+
+.trust-item strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: var(--display);
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-weight: 400;
+}
+
+.trust-item p {
+  margin-bottom: 0;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 .section {
   width: min(var(--max-width), 90vw);
   margin: 0 auto;
@@ -601,11 +661,33 @@ h1 em {
 }
 
 .service {
+  position: relative;
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 72px 1fr 18px;
   gap: 1.5rem;
   padding: 2.2rem 0;
   border-top: 1px solid var(--line);
+}
+
+.service::after {
+  width: 8px;
+  height: 8px;
+  align-self: center;
+  border: 1px solid rgba(183, 146, 77, 0.48);
+  content: "";
+  transform: rotate(45deg);
+  transition:
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+@media (hover: hover) {
+  .service:hover::after {
+    background: var(--gold-light);
+    box-shadow: 0 0 18px rgba(183, 146, 77, 0.28);
+    transform: rotate(45deg) scale(1.25);
+  }
 }
 
 .service:last-child {
@@ -768,13 +850,23 @@ h1 em {
   text-decoration-color: var(--gold);
 }
 
+.contact-link-note {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--gold);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .contact-item p {
   margin-bottom: 0;
 }
 
 .site-footer {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto 1fr auto;
   align-items: center;
   gap: 2rem;
   padding: 2rem 5vw;
@@ -788,8 +880,19 @@ h1 em {
   margin: 0;
 }
 
-.site-footer p:last-child {
+.site-footer > p:nth-child(3) {
   justify-self: end;
+}
+
+.back-to-top {
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 180ms ease;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  border-color: var(--gold);
 }
 
 .footer-brand {
@@ -950,6 +1053,20 @@ h1 em {
     grid-template-columns: 1fr;
   }
 
+  .trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-item {
+    min-height: 112px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .trust-item:last-child {
+    border-bottom: 0;
+  }
+
   .heritage-panel {
     grid-template-columns: 1fr;
     align-content: end;
@@ -969,6 +1086,10 @@ h1 em {
 
   .site-footer > p:nth-child(2) {
     display: none;
+  }
+
+  .back-to-top {
+    justify-self: end;
   }
 }
 
@@ -1007,7 +1128,7 @@ h1 em {
   }
 
   .service {
-    grid-template-columns: 42px 1fr;
+    grid-template-columns: 42px 1fr 12px;
     gap: 0.8rem;
   }
 
@@ -1030,7 +1151,11 @@ h1 em {
     gap: 1rem;
   }
 
-  .site-footer p:last-child {
+  .site-footer > p:nth-child(3) {
+    justify-self: start;
+  }
+
+  .back-to-top {
     justify-self: start;
   }
 }
