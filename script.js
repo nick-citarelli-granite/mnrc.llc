@@ -5,6 +5,10 @@ const year = document.querySelector("[data-year]");
 
 const setHeaderState = () => {
   header?.classList.toggle("scrolled", window.scrollY > 24);
+
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+  header?.style.setProperty("--scroll-progress", `${Math.min(progress, 100)}%`);
 };
 
 const closeNavigation = () => {
@@ -64,5 +68,36 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   );
 
   revealElements.forEach((element) => revealObserver.observe(element));
+}
+
+const trackedSections = document.querySelectorAll("#expertise, #heritage, #contact");
+const sectionLinks = document.querySelectorAll(".site-nav a[href^='#']");
+
+const setActiveSection = (sectionId = "") => {
+  sectionLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === `#${sectionId}`;
+    link.classList.toggle("is-active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
+
+if ("IntersectionObserver" in window) {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const activeEntry = entries.find((entry) => entry.isIntersecting);
+      if (activeEntry) setActiveSection(activeEntry.target.id);
+    },
+    {
+      rootMargin: "-35% 0px -55% 0px",
+      threshold: 0,
+    },
+  );
+
+  trackedSections.forEach((section) => sectionObserver.observe(section));
 }
 
