@@ -348,8 +348,17 @@ h1 em {
   border-radius: 50%;
 }
 
-.orbit::before,
-.orbit::after {
+.orbital-marker {
+  position: absolute;
+  inset: 0;
+  display: block;
+  animation: orbit-travel 18s linear infinite;
+  animation-delay: -4s;
+  will-change: transform;
+}
+
+.orbital-marker::before,
+.orbital-marker::after {
   position: absolute;
   top: 50%;
   width: 5px;
@@ -359,13 +368,14 @@ h1 em {
   background: var(--ink);
   content: "";
   transform: translateY(-50%);
+  box-shadow: 0 0 10px rgba(216, 188, 127, 0.34);
 }
 
-.orbit::before {
+.orbital-marker::before {
   left: -3px;
 }
 
-.orbit::after {
+.orbital-marker::after {
   right: -3px;
 }
 
@@ -380,10 +390,27 @@ h1 em {
   transform: rotate(35deg) scaleY(0.7);
 }
 
+.orbit-two .orbital-marker {
+  animation-duration: 24s;
+  animation-delay: -9s;
+  animation-direction: reverse;
+}
+
 .orbit-three {
   width: 72%;
   border-color: rgba(216, 188, 127, 0.12);
   transform: rotate(78deg) scaleY(0.62);
+}
+
+.orbit-three .orbital-marker {
+  animation-duration: 14s;
+  animation-delay: -2s;
+}
+
+@keyframes orbit-travel {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 .gem-rim {
@@ -1016,6 +1043,8 @@ h1 em {
   *,
   *::before,
   *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
