@@ -714,6 +714,194 @@ h1 em {
   color: var(--ink-soft);
 }
 
+.craft {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
+  grid-template-rows: auto auto;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.craft-image {
+  position: relative;
+  min-height: 650px;
+  grid-row: 1 / 3;
+  overflow: hidden;
+}
+
+.craft-image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 55%, rgba(17, 20, 20, 0.3));
+  content: "";
+}
+
+.craft-image img,
+.craft-detail img,
+.stone-card img,
+.heritage-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.craft-image img {
+  filter: saturate(0.7) contrast(1.06);
+}
+
+.image-index {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.7rem;
+  z-index: 1;
+  color: rgba(255, 253, 248, 0.72);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+}
+
+.craft-copy {
+  align-self: center;
+  padding: clamp(4rem, 7vw, 7rem) clamp(2.5rem, 6vw, 6rem);
+}
+
+.craft-copy h2,
+.stones-heading h2 {
+  margin-bottom: 1.7rem;
+  font-family: var(--display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+.craft-copy > p:not(.eyebrow) {
+  color: rgba(255, 253, 248, 0.66);
+}
+
+.craft-principles {
+  display: grid;
+  margin-top: 2.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.craft-principles span {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--gold-light);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.craft-detail {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0 clamp(2.5rem, 6vw, 6rem) clamp(3rem, 5vw, 5rem);
+}
+
+.craft-detail img {
+  aspect-ratio: 1 / 1;
+  filter: saturate(0.55);
+}
+
+.craft-detail figcaption {
+  max-width: 180px;
+  color: rgba(255, 253, 248, 0.55);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stones {
+  padding-bottom: clamp(7rem, 12vw, 11rem);
+}
+
+.stones-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  align-items: end;
+  gap: clamp(3rem, 8vw, 8rem);
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.stones-heading h2 {
+  max-width: 720px;
+  margin-bottom: 0;
+}
+
+.stones-heading > p {
+  margin-bottom: 0;
+  color: var(--ink-soft);
+}
+
+.stone-gallery {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr 0.65fr;
+  grid-template-rows: minmax(220px, 0.8fr) minmax(220px, 0.8fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.stone-card {
+  position: relative;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.stone-card-featured {
+  grid-row: 1 / 3;
+}
+
+.stone-card-documentary {
+  grid-column: 2 / 4;
+}
+
+.stone-card img {
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.stone-card:not(.stone-card-documentary) img {
+  object-fit: contain;
+}
+
+.stone-card-documentary img {
+  filter: saturate(0.7);
+}
+
+.stone-card figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(transparent, rgba(17, 20, 20, 0.72));
+  color: var(--white);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.stone-card figcaption span {
+  color: var(--gold-light);
+}
+
+@media (hover: hover) {
+  .stone-card:hover img {
+    transform: scale(1.025);
+  }
+}
+
 .heritage {
   width: 100%;
   padding: 0;
@@ -723,7 +911,7 @@ h1 em {
   position: relative;
   display: grid;
   min-height: 720px;
-  grid-template-columns: minmax(340px, 0.9fr) minmax(460px, 1.1fr);
+  grid-template-columns: minmax(300px, 0.82fr) minmax(460px, 1.18fr);
   align-items: end;
   gap: clamp(3rem, 5vw, 5.5rem);
   overflow: hidden;
@@ -766,14 +954,32 @@ h1 em {
   left: max(5vw, calc((100vw - var(--max-width)) / 2));
 }
 
-.heritage-year {
+.heritage-portrait {
   position: relative;
   z-index: 1;
-  margin: 0 0 -0.08em;
+  width: min(100%, 440px);
+  margin: 7rem 0 0;
+}
+
+.heritage-portrait img {
+  aspect-ratio: 0.78;
+  filter: sepia(0.18) saturate(0.72) contrast(1.04);
+}
+
+.heritage-portrait figcaption {
+  margin-top: 0.9rem;
+  color: rgba(255, 253, 248, 0.42);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heritage-year {
+  margin: 0 0 1.5rem;
   color: transparent;
   font-family: var(--display);
-  font-size: clamp(8rem, 22vw, 21rem);
-  line-height: 0.75;
+  font-size: clamp(5rem, 10vw, 9rem);
+  line-height: 0.8;
   -webkit-text-stroke: 1px rgba(216, 188, 127, 0.42);
 }
 
@@ -1053,6 +1259,29 @@ h1 em {
     grid-template-columns: 1fr;
   }
 
+  .craft {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .craft-image {
+    min-height: 520px;
+    grid-row: auto;
+  }
+
+  .craft-copy {
+    padding-bottom: 2.5rem;
+  }
+
+  .craft-detail {
+    grid-template-columns: 130px 1fr;
+  }
+
+  .stones-heading {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   .trust-strip {
     grid-template-columns: 1fr;
   }
@@ -1072,7 +1301,8 @@ h1 em {
     align-content: end;
   }
 
-  .heritage-year {
+  .heritage-portrait {
+    width: min(72vw, 400px);
     margin-top: 8rem;
   }
 
@@ -1132,6 +1362,33 @@ h1 em {
     gap: 0.8rem;
   }
 
+  .craft-image {
+    min-height: 390px;
+  }
+
+  .craft-copy {
+    padding: 4rem 6vw 2rem;
+  }
+
+  .craft-detail {
+    grid-template-columns: 110px 1fr;
+    padding: 0 6vw 4rem;
+  }
+
+  .stone-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 390px 230px 240px;
+  }
+
+  .stone-card-featured {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+
+  .stone-card-documentary {
+    grid-column: 1 / 3;
+  }
+
   .heritage-panel {
     min-height: 660px;
     padding-right: 6vw;
@@ -1143,7 +1400,7 @@ h1 em {
   }
 
   .heritage-year {
-    font-size: 29vw;
+    font-size: 24vw;
   }
 
   .site-footer {
@@ -1179,4 +1436,3 @@ h1 em {
     transform: none;
   }
 }
-

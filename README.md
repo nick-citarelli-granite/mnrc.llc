@@ -5,10 +5,11 @@ metals dealer.
 
 ## Project structure
 
-- `index.html` â€” page content and search metadata
-- `styles.css` â€” responsive layout, typography, and visual design
-- `script.js` â€” mobile navigation, header state, and subtle reveal motion
-- `robots.txt` and `sitemap.xml` â€” basic search-engine discovery
+- `index.html` — page content and search metadata
+- `styles.css` — responsive layout, typography, and visual design
+- `script.js` — mobile navigation, header state, and subtle reveal motion
+- `assets/images` — optimized customer-supplied photography
+- `robots.txt` and `sitemap.xml` — basic search-engine discovery
 
 There is no build step and no JavaScript framework. The site can be served
 directly by nginx.
@@ -40,7 +41,7 @@ server {
         try_files $uri $uri/ =404;
     }
 
-    location ~* \.(css|js|xml|txt)$ {
+    location ~* \.(css|js|xml|txt|jpg|jpeg|png|webp)$ {
         expires 7d;
         add_header Cache-Control "public, max-age=604800";
     }
@@ -48,4 +49,3 @@ server {
 ```
 
 TLS should be configured on the VPS before the public launch.
-

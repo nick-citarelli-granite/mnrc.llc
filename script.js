@@ -70,7 +70,7 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   revealElements.forEach((element) => revealObserver.observe(element));
 }
 
-const trackedSections = document.querySelectorAll("#expertise, #heritage, #contact");
+const trackedSections = document.querySelectorAll("#expertise, #craft, #heritage, #contact");
 const sectionLinks = document.querySelectorAll(".site-nav a[href^='#']");
 
 const setActiveSection = (sectionId = "") => {
@@ -100,4 +100,3 @@ if ("IntersectionObserver" in window) {
 
   trackedSections.forEach((section) => sectionObserver.observe(section));
 }
-
