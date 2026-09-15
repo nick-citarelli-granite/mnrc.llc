@@ -325,7 +325,7 @@ h1 em {
 .gem-scene {
   position: relative;
   display: grid;
-  width: clamp(290px, 35vw, 540px);
+  width: clamp(260px, 31vw, 470px);
   aspect-ratio: 1;
   place-items: center;
   isolation: isolate;
@@ -339,11 +339,11 @@ h1 em {
 
 .gem-scene::before {
   z-index: -2;
-  width: 78%;
+  width: 68%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: rgba(183, 146, 77, 0.2);
-  filter: blur(68px);
+  background: rgba(183, 146, 77, 0.14);
+  filter: blur(55px);
 }
 
 .gem-scene::after {
@@ -361,15 +361,6 @@ h1 em {
   aspect-ratio: 1;
   border: 1px solid rgba(216, 188, 127, 0.2);
   border-radius: 50%;
-}
-
-.hero-orbits {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: grid;
-  pointer-events: none;
-  place-items: center;
 }
 
 .orbital-marker {
@@ -437,33 +428,99 @@ h1 em {
   }
 }
 
-.hero-stone-image {
+.gem-rim {
   position: relative;
-  z-index: 1;
-  width: 68%;
+  width: 55%;
   aspect-ratio: 1;
-  overflow: hidden;
-  background: var(--white);
-  clip-path: polygon(11% 0, 89% 0, 100% 11%, 100% 89%, 89% 100%, 11% 100%, 0 89%, 0 11%);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.44);
-  transform: rotate(-2deg);
+  padding: 1px;
+  background: conic-gradient(
+    from 22.5deg,
+    rgba(216, 188, 127, 0.3),
+    rgba(255, 240, 199, 0.92),
+    rgba(142, 105, 45, 0.4),
+    rgba(216, 188, 127, 0.86),
+    rgba(216, 188, 127, 0.3)
+  );
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  filter: drop-shadow(0 18px 35px rgba(0, 0, 0, 0.42));
+  transform: rotate(45deg);
 }
 
-.hero-stone-image::after {
+.gemstone {
   position: absolute;
-  inset: 0;
-  border: 1px solid rgba(216, 188, 127, 0.5);
-  background: linear-gradient(135deg, rgba(216, 188, 127, 0.08), transparent 35% 70%, rgba(17, 20, 20, 0.06));
-  content: "";
-  pointer-events: none;
+  inset: 2px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 68% 26%, rgba(255, 243, 209, 0.24), transparent 20%),
+    conic-gradient(
+      from 22.5deg,
+      rgba(216, 188, 127, 0.03) 0deg 45deg,
+      rgba(216, 188, 127, 0.16) 45deg 90deg,
+      rgba(255, 255, 255, 0.035) 90deg 135deg,
+      rgba(183, 146, 77, 0.2) 135deg 180deg,
+      rgba(255, 255, 255, 0.025) 180deg 225deg,
+      rgba(216, 188, 127, 0.13) 225deg 270deg,
+      rgba(255, 255, 255, 0.045) 270deg 315deg,
+      rgba(183, 146, 77, 0.1) 315deg 360deg
+    ),
+    #121616;
+  clip-path: inherit;
 }
 
-.hero-stone-image img {
+.gemstone::before {
+  position: absolute;
+  inset: 13%;
+  border: 1px solid rgba(216, 188, 127, 0.42);
+  background: conic-gradient(
+    from 0deg,
+    rgba(216, 188, 127, 0.04),
+    rgba(216, 188, 127, 0.18),
+    rgba(255, 255, 255, 0.02),
+    rgba(216, 188, 127, 0.12),
+    rgba(216, 188, 127, 0.04)
+  );
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  content: "";
+}
+
+.cut-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.82) contrast(1.02);
+  width: 72%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(216, 188, 127, 0.58), transparent);
+  transform-origin: center;
+}
+
+.cut-one {
+  transform: translate(-50%, -50%);
+}
+
+.cut-two {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cut-three {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.cut-four {
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.gem-table {
+  position: absolute;
+  inset: 31%;
+  z-index: 3;
+  border: 1px solid rgba(255, 238, 195, 0.72);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 245, 220, 0.22), transparent 25%),
+    rgba(9, 12, 12, 0.66);
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  box-shadow: inset 0 0 24px rgba(216, 188, 127, 0.14);
 }
 
 .gem-glint {
@@ -491,7 +548,7 @@ h1 em {
   opacity: 0.66;
 }
 
-.hero-art > figcaption {
+.hero-art > p {
   margin: clamp(5rem, 8vw, 8rem) 0 0;
   color: rgba(255, 253, 248, 0.55);
   font-size: 0.68rem;
@@ -499,7 +556,7 @@ h1 em {
   text-transform: uppercase;
 }
 
-.hero-art > figcaption span {
+.hero-art > p span {
   margin-right: 0.7rem;
   color: var(--gold-light);
 }
@@ -1189,7 +1246,7 @@ h1 em {
     justify-self: center;
   }
 
-  .hero-art > figcaption {
+  .hero-art > p {
     margin-top: 5rem;
   }
 
@@ -1273,29 +1330,9 @@ h1 em {
 
   .hero {
     min-height: auto;
-    gap: 1.75rem;
-    padding-top: 6.5rem;
     padding-right: 6vw;
     padding-bottom: 2.4rem;
     padding-left: 6vw;
-  }
-
-  .hero-art {
-    grid-row: 1;
-    justify-self: end;
-    padding: 0;
-  }
-
-  .hero-art > figcaption {
-    margin-top: 2rem;
-  }
-
-  .hero-copy {
-    grid-row: 2;
-  }
-
-  .hero-note {
-    grid-row: 3;
   }
 
   .hero-actions {
@@ -1309,7 +1346,7 @@ h1 em {
   }
 
   .gem-scene {
-    width: min(76vw, 300px);
+    width: min(65vw, 280px);
   }
 
   .hero-note {
